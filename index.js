@@ -56,35 +56,29 @@ program
 			config.dir = __dirname + '/' + config.name;
 
 			// Collect product name
-			const product = yield prompt.confirm(chalk.rgb(color.question.r, color.question.g, color.question.b)('\nWhich product are you setting up? (1/2/3)\n 1) Venue Lightning\n 2) Venue Visualforce (E-Commerce Order)\n 3) Encore\nProduct: '));
+			const product = yield prompt(chalk.rgb(color.question.r, color.question.g, color.question.b)('\nWhich product are you setting up? (1/2/3)\n 1) Venue Lightning\n 2) Venue Visualforce (E-Commerce Order)\n 3) Encore\nProduct: '));
 
-			let productName;
+			let productName,
+					repoUrl;
 			if(product === '1') {
 				productName = 'Venue Lightning';
+				repoUrl = repos.venueLightning;
 			} else if(product === '2') {
 				productName = 'Venue Visualforce';
+				repoUrl = repos.venueVisualforce;
 			} else if(product === '3') {
 				productName = 'Encore';
+				repoUrl = repos.encore;
 			}
 
-			// Create directory
+			// Confirm directory setup
 			if(yield prompt.confirm(chalk.rgb(color.question.r, color.question.g, color.question.b)(`\nWe are going to set up ${productName} in ${config.dir}. Is this okay? (Yes/No) `))) {
 
+				// Create directory
 				console.log(chalk.rgb(color.process.r, color.process.g, color.process.b)(`Creating ${config.dir}...`));
 				fs.emptyDirSync(config.dir);
 				process.chdir(config.dir);
 				console.log(chalk.rgb(color.complete.r, color.complete.g, color.complete.b)('Directory created.'));
-
-				let repoUrl;
-				if(config.isVenue) {
-					if(config.isLightning) {
-						repoUrl = repos.venueLightning;
-					} else {
-						repoUrl = repos.venueVisualforce;
-					}
-				} else {
-					repoUrl = repos.encore;
-				}
 
 				// Download quickstart
 				const bitbucketUsername = yield prompt(chalk.rgb(color.question.r, color.question.g, color.question.b)('\nWhat is your Bitbucket username? '));
