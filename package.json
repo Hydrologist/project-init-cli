@@ -1,6 +1,6 @@
 {
   "name": "kg-project-init",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A command-line tool for setting up new Kinetic Growth projects.",
   "main": "index.js",
   "scripts": {
