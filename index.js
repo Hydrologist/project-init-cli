@@ -53,7 +53,7 @@ program
 
 			// Convert customer name to project name
 			config.name = customer.replace(' ', '-').replace('.', '').toLowerCase() + '-implementation';
-			config.dir = __dirname + '/' + config.name;
+			config.dir = process.cwd() + '/' + config.name;
 
 			// Collect product name
 			const product = yield prompt(chalk.rgb(color.question.r, color.question.g, color.question.b)('\nWhich product are you setting up? (1/2/3)\n 1) Venue Lightning\n 2) Venue Visualforce (E-Commerce Order)\n 3) Encore\nProduct: '));
