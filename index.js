@@ -101,7 +101,7 @@ program
 				execSync('git commit -m "Initial Setup"');
 				console.log(chalk.rgb(color.process.r, color.process.g, color.process.b)('Pushing to Bitbucket...'));
 				// Comment back in to push to origin
-				//execSync(`git push origin sandbox/${sandboxName}`);
+				execSync(`git push origin sandbox/${sandboxName}`);
 				console.log(chalk.rgb(color.complete.r, color.complete.g, color.complete.b)('Bitbucket is updated.'));
 
 				// Provide IDE instructions
