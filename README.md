@@ -1,4 +1,4 @@
-# kg-project-init
+# project-init
 This node module makes it easy to set up Kinetic Growth implementations.
 
 ## Installation
