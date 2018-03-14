@@ -13,26 +13,10 @@ const superagent = require('superagent');
 // Chalk colors
 // ===========================
 const color = {
-	title: {
-		r: 26,
-		g: 188,
-		b: 156
-	},
-	question: {
-		r: 155,
-		g: 89,
-		b: 182
-	},
-	process: {
-		r: 241,
-		g: 196,
-		b: 15
-	},
-	complete: {
-		r: 46,
-		g: 204,
-		b: 113
-	}
+	title: { r: 26, g: 188, b: 156 },
+	question: { r: 155, g: 89, b: 182 },
+	process: { r: 241, g: 196, b: 15 },
+	complete: { r: 46, g: 204, b: 113 }
 };
 
 // Configuration
@@ -49,6 +33,8 @@ program
 	.arguments('<customer>')
 	.action(function (customer) {
 		co(function* () {
+			
+			// Introduction
 			console.log(chalk.rgb(color.title.r, color.title.g, color.title.b).bold('\n\nLooks like you are setting up a new Kinetic Growth project for ' + customer + '!\n\nLet\'s walk through some basic questions to help you get started.'));
 
 			// Convert customer name to project name
@@ -58,21 +44,21 @@ program
 			// Collect product name
 			const product = yield prompt(chalk.rgb(color.question.r, color.question.g, color.question.b)('\nWhich product are you setting up? (1/2/3)\n 1) Venue Lightning\n 2) Venue Visualforce (E-Commerce Order)\n 3) Encore\nProduct: '));
 
-			let productName,
-					repoUrl;
-			if(product === '1') {
+			let productName, repoUrl;
+
+			if (product === '1') {
 				productName = 'Venue Lightning';
 				repoUrl = repos.venueLightning;
-			} else if(product === '2') {
+			} else if (product === '2') {
 				productName = 'Venue Visualforce';
 				repoUrl = repos.venueVisualforce;
-			} else if(product === '3') {
+			} else if (product === '3') {
 				productName = 'Encore';
 				repoUrl = repos.encore;
 			}
 
 			// Confirm directory setup
-			if(yield prompt.confirm(chalk.rgb(color.question.r, color.question.g, color.question.b)(`\nWe are going to set up ${productName} in ${config.dir}. Is this okay? (Yes/No) `))) {
+			if (yield prompt.confirm(chalk.rgb(color.question.r, color.question.g, color.question.b)(`\nWe are going to set up ${productName} in ${config.dir}. Is this okay? (Yes/No) `))) {
 
 				// Create directory
 				console.log(chalk.rgb(color.process.r, color.process.g, color.process.b)(`Creating ${config.dir}...`));
@@ -106,11 +92,11 @@ program
 
 				// Provide IDE instructions
 				const ide = yield prompt(chalk.rgb(color.question.r, color.question.g, color.question.b)('\nWhich IDE are you using? (1/2/3/4) \n 1) Mavensmate\n 2) Force.com IDE\n 3) Developer Console\n 4) Other \n IDE: '));
-				if(ide.toLowerCase() === '1') {
+				if (ide.toLowerCase() === '1') {
 					console.log(chalk.rgb(color.title.r, color.title.g, color.title.b)('Please open your project in Sublime Text, right click on your project root folder and select "Mavensmate" > "Create Mavensmate Project" to convert the directory to a Mavensmate project. \nExisting Directory conversion is not currently supported in Atom.'));
-				} else if(ide.toLowerCase() === '2') {
+				} else if (ide.toLowerCase() === '2') {
 					console.log(chalk.rgb(color.title.r, color.title.g, color.title.b)('No additional setup is needed to use this project in the Force.com IDE.'));
-				} else if(ide.toLowerCase() === '3') {
+				} else if (ide.toLowerCase() === '3') {
 					console.log(chalk.red('Using the Developer Console is highly discouraged as this tool provides no way to download code and commit changes to git.'));
 				} else {
 					console.log(chalk.rgb(color.title.r, color.title.g, color.title.b)('Please follow the directions for your specific IDE to connect this project to Salesforce.'));
@@ -120,9 +106,9 @@ program
 				config.editor = yield prompt(chalk.rgb(color.question.r, color.question.g, color.question.b)('\nWhich editor are you using? (1/2/3)\n 1) Sublime\n 2) Atom\n 3) Other\nEditor: '));
 				config.editor = config.editor.toLowerCase();
 
-				if(config.editor === '1') {
+				if (config.editor === '1') {
 					console.log(chalk.rgb(color.title.r, color.title.g, color.title.b)(`Sublime Text does not have a CLI so you will have to open the editor manually.`));
-				} else if(config.editor === '2') {
+				} else if (config.editor === '2') {
 					console.log(chalk.rgb(color.process.r, color.process.g, color.process.b)('Opening your project in Atom...'));
 					execSync('atom .');
 					console.log(chalk.rgb(color.complete.r, color.complete.g, color.complete.b)('Project opened in Atom'));
