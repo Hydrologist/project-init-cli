@@ -8,7 +8,6 @@ const program = require('commander');
 const chalk = require('chalk');
 const execSync = require('child_process').execSync;
 const fs = require('fs-extra');
-const superagent = require('superagent');
 
 // Chalk colors
 // ===========================
